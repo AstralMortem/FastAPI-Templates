@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fastapi-template"
+version = "0.1.0"
+description = ""
+authors = ["AstralMortem <chaliukvladyslav@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.0"
+alembic = "^1.13.1"
+pydantic = "^2.7.4"
+pydantic-settings = "^2.3.4"
+authx = "^1.2.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
