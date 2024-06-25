@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from authx import AuthXConfig
 from pydantic_settings import BaseSettings
 
 

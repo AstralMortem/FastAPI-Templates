@@ -1,9 +1,7 @@
 from abc import ABC, abstractmethod
 from sqlalchemy import insert, select, update, delete
 from uuid import UUID
-
 from ..models.mixins import BaseModel
-from ..models.auth import User
 from ..database import sessionmanager
 
 type PrimaryKey = str | int | UUID
@@ -77,7 +75,3 @@ class SQLAlchemyRepository(AbstractRepository):
             result = await session.execute(query)
             await session.commit()
             return result.scalar_one_or_none()
-
-
-class UserRepository(SQLAlchemyRepository):
-    model = User
