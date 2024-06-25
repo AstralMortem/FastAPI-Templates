@@ -34,6 +34,11 @@
             "name": "sqlalchemy",
             "depth": 4,
             "includeAllSymbols": true
+        },
+        {
+            "name": "fastapi_users",
+            "depth": 3,
+            "includeAllSymbols": true
         }
     ],
       
