@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from sqlalchemy import insert, select, update, delete
 from uuid import UUID
-from ..models.mixins import BaseModel
+from ..models.mixins import BaseTable
 from ..database import sessionmanager
 
 type PrimaryKey = str | int | UUID
@@ -28,9 +28,13 @@ class AbstractRepository(ABC):
     async def delete(self, id, _column=None):
         raise NotImplemented
 
+    @abstractmethod
+    async def custom(self, statement, _commit=False):
+        raise NotImplemented
+
 
 class SQLAlchemyRepository(AbstractRepository):
-    model: type[BaseModel]
+    model: type[BaseTable]
 
     async def get_one(self, id: PrimaryKey, _column="id"):
         async with sessionmanager.session() as session:
@@ -75,3 +79,10 @@ class SQLAlchemyRepository(AbstractRepository):
             result = await session.execute(query)
             await session.commit()
             return result.scalar_one_or_none()
+
+    async def custom(self, statement, _commit=False):
+        async with sessionmanager.session() as session:
+            result = await session.execute(statement)
+            if _commit:
+                await session.commit()
+            return result
