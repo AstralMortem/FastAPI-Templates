@@ -4,9 +4,9 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from ..app.config import settings
-from ..app.models.mixins import BaseModel
-from ..app.models.auth import User
+from app.config import settings
+from app.models.mixins import BaseModel
+from app.models import auth
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from sqlalchemy import insert, select, update, delete
 from uuid import UUID
+
+from ..models.mixins import BaseModel
 from ..models.auth import User
 from ..database import sessionmanager
 
@@ -30,7 +32,7 @@ class AbstractRepository(ABC):
 
 
 class SQLAlchemyRepository(AbstractRepository):
-    model = None
+    model: type[BaseModel]
 
     async def get_one(self, id: PrimaryKey, _column="id"):
         async with sessionmanager.session() as session:
@@ -50,6 +52,7 @@ class SQLAlchemyRepository(AbstractRepository):
         async with sessionmanager.session() as session:
             query = insert(self.model).values(**data).returning(self.model)
             result = await session.execute(query)
+            await session.commit()
             return result.scalar_one_or_none()
 
     async def update(self, id: PrimaryKey, data: dict, _column="id"):
@@ -61,6 +64,7 @@ class SQLAlchemyRepository(AbstractRepository):
                 .returning(self.model)
             )
             result = await session.execute(query)
+            await session.commit()
             return result.scalar_one_or_none()
 
     async def delete(self, id: PrimaryKey, _column="id"):
@@ -71,6 +75,7 @@ class SQLAlchemyRepository(AbstractRepository):
                 .returning(self.model)
             )
             result = await session.execute(query)
+            await session.commit()
             return result.scalar_one_or_none()
 
 

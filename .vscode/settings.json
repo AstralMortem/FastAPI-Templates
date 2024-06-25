@@ -7,7 +7,7 @@
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.analysis.autoSearchPaths": true,
     "python.analysis.autoImportCompletions": true,
-    "python.analysis.completeFunctionParens": true,
+    "python.analysis.completeFunctionParens": false,
     "python.analysis.inlayHints.variableTypes": true,
     "python.analysis.inlayHints.callArgumentNames": "off",
     "python.analysis.inlayHints.functionReturnTypes": true,

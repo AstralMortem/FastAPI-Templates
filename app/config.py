@@ -25,10 +25,6 @@ class Settings(BaseSettings):
     # PROJECT SETTINGS
     DEBUG: bool = True  # change on production
     project_name: str = "Fitness App"
-    MODULES: list[str] = [
-        "auth",
-        "core",
-    ]
 
     # SECURE SETTINGS
     SECRET_KEY: str = os.getenv(
